@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Camera, User } from 'lucide-react';
 
 const CameraPage = () => {
+  const videoRef = useRef(null);
+  const [streamActive, setStreamActive] = useState(false);
+
+  useEffect(() => {
+    let currentStream = null;
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        currentStream = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          setStreamActive(true);
+        }
+      })
+      .catch((err) => {
+        console.error("Error accessing camera:", err);
+      });
+
+    return () => {
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
   return (
     <div>
       <div className="page-header">
@@ -19,9 +42,23 @@ const CameraPage = () => {
             alignItems: 'center', 
             justifyContent: 'center',
             position: 'relative',
-            minHeight: '400px'
+            minHeight: '400px',
+            overflow: 'hidden'
           }}>
-            <User size={80} color="#94a3b8" />
+            <video 
+              ref={videoRef} 
+              autoPlay 
+              playsInline 
+              muted 
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: streamActive ? 'block' : 'none',
+                transform: 'scaleX(-1)'
+              }}
+            />
+            {!streamActive && <User size={80} color="#94a3b8" />}
             <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.6)', color: 'white', padding: '0.5rem 1rem', borderRadius: '4px', fontSize: '0.875rem' }}>
               LIVE PREVIEW
             </div>
