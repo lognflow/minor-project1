@@ -9,12 +9,12 @@ const Welcome = () => {
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-color)' }}>
       <div style={{ textAlign: 'center', maxWidth: '500px', padding: '2rem' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <div className="rgb-text">
-            <Eye size={80} strokeWidth={1.5} />
+          <div>
+            <img src="/logo.png" alt="EyeBase Logo" style={{ height: '120px', width: 'auto' }} />
           </div>
         </div>
         
-        <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>EyeMouse</h1>
+        <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>EyeBase</h1>
         <h2 style={{ fontSize: '1.5rem', color: 'var(--text-light)', fontWeight: 400, marginBottom: '2rem' }}>
           Hands-Free Computer Control
         </h2>

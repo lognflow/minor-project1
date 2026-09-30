@@ -13,11 +13,11 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <div className="sidebar-logo rgb-text">
-          <Eye size={32} />
+        <div className="sidebar-logo">
+          <img src="/logo.png" alt="EyeBase" style={{ height: '40px', width: 'auto' }} />
         </div>
         <div className="sidebar-title-container">
-          <h2 className="sidebar-title">EyeMouse</h2>
+          <h2 className="sidebar-title">EyeBase</h2>
           <span className="sidebar-subtitle">Hands-Free Control</span>
         </div>
       </div>
@@ -53,7 +53,7 @@ const Sidebar = () => {
           <span>System Connected</span>
         </div>
         <div className="app-version">
-          EyeMouse v1.0
+          EyeBase v1.0
         </div>
       </div>
     </div>

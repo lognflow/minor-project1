@@ -1,6 +1,6 @@
-# EyeMouse: Hands-Free Computer Control
+# EyeBase: Hands-Free Computer Control
 
-EyeMouse is an assistive-technology project designed to allow physically challenged users to operate a computer without using their hands. 
+EyeBase is an assistive-technology project designed to allow physically challenged users to operate a computer without using their hands. 
 
 This repository currently contains the **Frontend UI** built for the project.
 

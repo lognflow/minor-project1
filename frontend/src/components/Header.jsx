@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-left">
-        <h1 className="header-title">EyeMouse</h1>
+        <h1 className="header-title">EyeBase</h1>
         <span style={{ color: 'var(--text-light)', fontSize: '0.875rem', display: 'none' }}>Hands-Free Computer Control</span>
       </div>
       

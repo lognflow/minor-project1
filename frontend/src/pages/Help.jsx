@@ -5,7 +5,7 @@ const Help = () => {
   return (
     <div>
       <div className="page-header">
-        <h1 className="page-title">How to Use EyeMouse</h1>
+        <h1 className="page-title">How to Use EyeBase</h1>
         <p className="subtitle">Learn how to set up and control the application.</p>
       </div>
 
