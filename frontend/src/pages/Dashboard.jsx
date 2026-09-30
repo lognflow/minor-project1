@@ -4,13 +4,13 @@ import { Play, Pause, Square, User, Video } from 'lucide-react';
 const Dashboard = () => {
   const [isControlling, setIsControlling] = useState(false);
   const videoRef = useRef(null);
+  const streamRef = useRef(null);
   const [streamActive, setStreamActive] = useState(false);
 
   useEffect(() => {
-    let currentStream = null;
     navigator.mediaDevices.getUserMedia({ video: true })
       .then((stream) => {
-        currentStream = stream;
+        streamRef.current = stream;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
           setStreamActive(true);
@@ -21,11 +21,19 @@ const Dashboard = () => {
       });
 
     return () => {
-      if (currentStream) {
-        currentStream.getTracks().forEach(track => track.stop());
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
       }
     };
   }, []);
+
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+      setStreamActive(false);
+    }
+  };
 
   return (
     <div>
@@ -171,7 +179,7 @@ const Dashboard = () => {
             <Pause size={24} /> PAUSE CONTROL
           </button>
         )}
-        <button className="danger-button" style={{ padding: '1rem 2rem', fontSize: '1.125rem' }} onClick={() => setIsControlling(false)}>
+        <button className="danger-button" style={{ padding: '1rem 2rem', fontSize: '1.125rem' }} onClick={() => { setIsControlling(false); stopCamera(); }}>
           <Square size={24} /> EMERGENCY STOP
         </button>
       </div>
