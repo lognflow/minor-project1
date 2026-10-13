@@ -1,85 +1,113 @@
 import React from 'react';
-import { AlertTriangle, Info } from 'lucide-react';
+import { AlertTriangle, Info, Keyboard, Sparkles, Target, MousePointer2 } from 'lucide-react';
 
 const Help = () => {
   return (
     <div>
       <div className="page-header">
-        <h1 className="page-title">How to Use EyeBase</h1>
-        <p className="subtitle">Learn how to set up and control the application.</p>
+        <h1 className="page-title">EyeBase Guide & Controls</h1>
+        <p className="subtitle">Master hands-free computer control using head tracking, intentional blinks, and mouth gestures.</p>
       </div>
 
       <div className="grid grid-cols-2" style={{ gap: '2rem' }}>
         <div className="flex-col gap-6">
           <div className="card">
-            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <div style={{ background: 'var(--rgb-gradient)', width: '24px', height: '24px', borderRadius: '50%', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem' }}>i</div>
-              Getting Started Steps
+            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.125rem' }}>
+              <div style={{ background: 'var(--rgb-gradient)', width: '28px', height: '28px', borderRadius: '50%', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                1
+              </div>
+              Hands-Free Interaction Steps
             </h3>
             
             <div className="flex-col gap-4">
               {[
-                'Connect your webcam and ensure good lighting.',
-                'Go to the Camera page and check your feed.',
-                'Complete the Calibration process.',
-                'Navigate to Dashboard or Mouse Control.',
-                'Click "START MOUSE CONTROL".',
-                'Move your head to move the cursor.',
-                'Blink intentionally to click.',
-                'Open your mouth to activate scroll mode.'
+                { title: 'Camera & Lighting', desc: 'Sit 50–70 cm directly facing your webcam in steady, comfortable lighting.' },
+                { title: 'Homography Calibration', desc: 'Navigate to Calibration and point your head at the 9 red dots. Dots turn green when sampled.' },
+                { title: 'Head Movement → Cursor', desc: 'Point your head naturally. The 1-Euro adaptive filter eliminates jitter, while Stillness Lock stabilizes clicks.' },
+                { title: 'Intentional Blink → Left Click', desc: 'Close both eyes and hold for 0.4s to trigger a left click. Natural quick blinks will not click.' },
+                { title: 'Mouth Opening → Scroll Mode', desc: 'Open your mouth briefly (0.2s) to switch between MOVE mode and SCROLL mode.' },
+                { title: 'Tilt Head to Scroll', desc: 'While in SCROLL mode, tilt your head slightly up or down to scroll web pages or documents.' }
               ].map((step, index) => (
                 <div key={index} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--hover-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', fontWeight: 'bold', flexShrink: 0 }}>
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--hover-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 'bold', flexShrink: 0, marginTop: '2px' }}>
                     {index + 1}
                   </div>
-                  <span style={{ lineHeight: '1.5', paddingTop: '2px' }}>{step}</span>
+                  <div>
+                    <strong style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.2rem' }}>{step.title}</strong>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', lineHeight: '1.4' }}>{step.desc}</span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="card" style={{ border: '1px solid #fca5a5', background: '#fef2f2' }}>
-            <h3 style={{ marginBottom: '1rem', color: 'var(--error-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <AlertTriangle size={20} />
-              Emergency Stop
+            <h3 style={{ marginBottom: '0.75rem', color: 'var(--error-color)', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.125rem' }}>
+              <AlertTriangle size={22} />
+              Safety & Emergency Stop
             </h3>
-            <p style={{ color: '#991b1b' }}>
-              Press <strong>ESC</strong> on your keyboard at any time to instantly stop mouse control and return to normal operation.
+            <p style={{ color: '#991b1b', lineHeight: 1.5, margin: 0, fontSize: '0.9rem' }}>
+              Press <strong>ESC</strong> on your keyboard at any moment, or click the red <strong>EMERGENCY STOP</strong> button in the UI. 
+              The system immediately releases cursor control and enters safety standby.
             </p>
           </div>
         </div>
 
         <div className="flex-col gap-6">
           <div className="card">
-            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Info size={20} />
-              Frequently Asked Questions
+            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.125rem' }}>
+              <Keyboard size={22} color="var(--primary-color)" />
+              Keyboard Shortcuts
             </h3>
             
-            <div className="flex-col gap-6">
+            <div className="flex-col gap-3">
+              {[
+                { key: 'ESC', action: 'Emergency Stop / Halt Mouse Control immediately' },
+                { key: 'P', action: 'Pause / Resume Mouse Control' },
+                { key: 'R', action: 'Quick Recalibrate Head Position' },
+                { key: 'Mouth Open', action: 'Gesture shortcut: Toggle MOVE ↔ SCROLL' },
+                { key: '0.4s Blink', action: 'Gesture shortcut: Left Mouse Click' },
+              ].map((item, index) => (
+                <div key={index} className="flex justify-between items-center" style={{ padding: '0.6rem 0', borderBottom: index < 4 ? '1px solid var(--border-color)' : 'none' }}>
+                  <span style={{ background: '#0f172a', color: '#f8fafc', padding: '0.25rem 0.6rem', borderRadius: '4px', fontFamily: 'monospace', fontWeight: 700, fontSize: '0.85rem' }}>
+                    {item.key}
+                  </span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', textAlign: 'right' }}>{item.action}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="card">
+            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.125rem' }}>
+              <Info size={22} color="var(--primary-color)" />
+              Troubleshooting FAQ
+            </h3>
+            
+            <div className="flex-col gap-4">
               <div>
-                <h4 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Why is cursor movement unstable?</h4>
-                <div style={{ background: 'var(--hover-bg)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                  <p style={{ margin: 0, color: 'var(--text-light)' }}>
-                    Check your lighting to ensure your face is clearly visible. You can also adjust the <strong>Smoothing</strong> setting and enable the <strong>1-Euro Filter</strong> in Settings.
+                <h4 style={{ fontSize: '0.95rem', marginBottom: '0.35rem' }}>Cursor drifts or doesn't reach screen corners?</h4>
+                <div style={{ background: 'var(--hover-bg)', padding: '0.85rem', borderRadius: 'var(--radius-md)' }}>
+                  <p style={{ margin: 0, color: 'var(--text-light)', fontSize: '0.85rem', lineHeight: 1.4 }}>
+                    Run the 9-point <strong>Homography Calibration</strong>. Make sure you point your head firmly toward each target dot. You can also increase <strong>Cursor Speed Multiplier</strong> in Settings.
                   </p>
                 </div>
               </div>
 
               <div>
-                <h4 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Why isn't my face detected?</h4>
-                <div style={{ background: 'var(--hover-bg)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                  <p style={{ margin: 0, color: 'var(--text-light)' }}>
-                    Move closer to the camera (recommended 50-70cm). Make sure you don't have strong backlight behind you and that your camera lens is clean.
+                <h4 style={{ fontSize: '0.95rem', marginBottom: '0.35rem' }}>Blinks are triggering accidentally?</h4>
+                <div style={{ background: 'var(--hover-bg)', padding: '0.85rem', borderRadius: 'var(--radius-md)' }}>
+                  <p style={{ margin: 0, color: 'var(--text-light)', fontSize: '0.85rem', lineHeight: 1.4 }}>
+                    Increase <strong>Hold Duration for Click</strong> in Settings from 0.4s to 0.5s or lower the <strong>Blink Threshold (EAR)</strong> to 0.15 so normal blinks don't trigger clicks.
                   </p>
                 </div>
               </div>
 
               <div>
-                <h4 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Why isn't blink detection working?</h4>
-                <div style={{ background: 'var(--hover-bg)', padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                  <p style={{ margin: 0, color: 'var(--text-light)' }}>
-                    An intentional blink must be slightly longer than a natural blink. You can adjust the <strong>Blink Sensitivity</strong> and <strong>Blink Duration</strong> in the Settings page.
+                <h4 style={{ fontSize: '0.95rem', marginBottom: '0.35rem' }}>Micro-jitters when trying to read or click?</h4>
+                <div style={{ background: 'var(--hover-bg)', padding: '0.85rem', borderRadius: 'var(--radius-md)' }}>
+                  <p style={{ margin: 0, color: 'var(--text-light)', fontSize: '0.85rem', lineHeight: 1.4 }}>
+                    Ensure <strong>Stillness Lock</strong> is enabled in Settings. When you hold your head steady, the cursor completely freezes on target until you make a deliberate movement.
                   </p>
                 </div>
               </div>

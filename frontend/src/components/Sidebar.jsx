@@ -2,14 +2,19 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   Home, 
+  MousePointer2,
+  Target,
   Camera, 
   Settings, 
   Activity, 
   HelpCircle,
   Eye
 } from 'lucide-react';
+import { useEyeMouse } from '../context/EyeMouseContext';
 
 const Sidebar = () => {
+  const { isConnected, telemetry } = useEyeMouse();
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -26,6 +31,16 @@ const Sidebar = () => {
         <NavLink to="/dashboard" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
           <Home size={20} />
           <span>Dashboard</span>
+        </NavLink>
+
+        <NavLink to="/mouse-control" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
+          <MousePointer2 size={20} />
+          <span>Mouse Control</span>
+        </NavLink>
+
+        <NavLink to="/calibration" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
+          <Target size={20} />
+          <span>Calibration</span>
         </NavLink>
 
         <NavLink to="/camera" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
@@ -49,8 +64,8 @@ const Sidebar = () => {
       
       <div className="sidebar-footer">
         <div className="system-status">
-          <span className="status-dot status-active"></span>
-          <span>System Connected</span>
+          <span className={`status-dot ${isConnected ? 'status-active' : 'status-inactive'}`}></span>
+          <span>{isConnected ? (telemetry.isControlling ? 'Control Active' : 'Backend Connected') : 'Connecting Backend'}</span>
         </div>
         <div className="app-version">
           EyeBase v1.0

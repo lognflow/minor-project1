@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "backend": "python ../eye-controlled-mouse/server.py",
+    "start": "python ../run.py",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
